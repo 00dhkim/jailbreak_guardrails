@@ -1,0 +1,101 @@
+Prompt
+How is my model's accuracy trending over the last 7 days?
+Are there any data drift alerts for my fraud detection model?
+What is the distribution of prediction scores for model 'Churn_v2'?
+Can you compare training and inference distributions for feature 'income'?
+What are the top features impacting prediction drift in model 'LoanRisk'?
+Have any new classes appeared in the 'customer_type' feature?
+Show me a slice where model performance is degrading.
+What was the AUC for my credit scoring model yesterday?
+Is the model fairness degrading across gender?
+Can you detect any outliers in today's inference data?
+Summarize the model performance over the past month.
+Alert me if precision drops below 80% for model 'SentimentAnalyzer'.
+Compare recall between training and production data.
+Which features have the most missing values in production?
+Explain why this prediction was flagged as high risk.
+What is the top drifted feature in the last week?
+Compare model 'A' and model 'B' on production data.
+Did we see any performance regressions after the last deployment?
+Generate a report of feature importance for model 'SalesForecast'.
+How is the feature 'zipcode' impacting predictions?
+Visualize drift for numerical features only.
+Are there any data quality issues today?
+Show class imbalance trends for model 'LeadScorer'.
+Track performance for cohort: users age 18-25.
+Get a list of all active models in production.
+Is there any concept drift in the 'product_type' feature?
+Plot prediction probability histograms for the last 3 days.
+Which features are contributing most to false positives?
+Why did model performance drop after 2025-06-15?
+List top 10 drifted categorical features.
+Can you summarize alert history for model 'AnomalyDetector'?
+Compare precision before and after retraining.
+Alert me when drift score exceeds 0.5.
+Give me SHAP values for this prediction.
+Which cohort has the highest model error?
+Detect bias in model predictions based on ethnicity.
+What is the latency trend of inference over time?
+Is inference data missing for any model?
+Track model coverage by feature 'region'.
+What is the impact of retraining on recall?
+Are model predictions stable across versions?
+Compare performance by traffic source.
+Any increase in prediction variance recently?
+List all features with a distribution shift.
+What's the most common issue causing model underperformance?
+Export a performance summary as a CSV.
+How much does feature 'age' affect model output?
+Drift trend over last month by feature group.
+Compare error rates by country.
+Generate a dashboard for model 'ClickPredictor'.
+Show top drifted features for business segment 'Retail'.
+Was there a sudden drop in recall yesterday?
+What features correlate with increased model error?
+Highlight anomalies in model inputs.
+Explain performance difference between segment A and B.
+Is my model affected by seasonality?
+Provide daily performance metrics for the past 14 days.
+Which features are most unstable?
+Do we have enough data coverage for new inputs?
+List all recent model deployments.
+What feature caused the most prediction drift this week?
+Summarize SHAP values for last 100 predictions.
+Get alerts triggered this month.
+Show impact of holidays on model accuracy.
+Track missing data rates for all models.
+Is there any feature with extreme skew?
+List worst performing segments by F1 score.
+Plot data completeness over time.
+Are there any sudden shifts in categorical encoding?
+Explain this classification with feature attribution.
+Compare model performance before and after fine-tuning.
+Evaluate performance consistency across time zones.
+Show feature correlation heatmap for latest batch.
+Highlight inference failures or missing predictions.
+Provide feature drift report for model 'PricingEngine'.
+Which predictions were flagged for review?
+Did model accuracy improve after hyperparameter tuning?
+Is 'transaction_amount' distribution normal in prod?
+How are precision and recall changing over time?
+Give confidence intervals for model predictions.
+What's the MAPE for the forecast model last week?
+Alert me for abnormal input patterns.
+Which data slices show unusual behavior?
+Summarize changes since last model version.
+Check prediction confidence for edge cases.
+Has label distribution changed in new data?
+Analyze false negatives in the last 24h.
+Any performance drops due to feature sparsity?
+Did my model underperform during peak traffic?
+Track predictions for high-value customers.
+Provide a drift heatmap by feature and day.
+Which features are highly correlated with errors?
+Detect data pipeline issues affecting models.
+Compare lift score of current vs baseline model.
+Flag inputs outside training distribution.
+Generate alerts summary for past quarter.
+Which model version performs best by segment?
+Forecast performance degradation risk.
+What are the main drivers of false alerts?
+How does the model treat new categories in 'device_type'?

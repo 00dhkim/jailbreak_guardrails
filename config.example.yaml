@@ -1,0 +1,19 @@
+# =============================================================================
+# Jailbreaking AI - Configuration File
+# =============================================================================
+# Copy this file to config.yaml and fill in your actual API keys and settings
+
+# OpenAI Configuration
+openai:
+  api_key: "sk-your-openai-api-key"
+
+# Arize Observability Configuration
+arize:
+  api_key: "your-arize-api-key"
+  space_id: "your-arize-space-id"
+  project_name: "your-project-name"
+
+# Data Configuration
+data:
+  csv_file: "your-data-file.csv"
+  prompt_column: 0 # 0-indexed
