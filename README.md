@@ -10,19 +10,19 @@ python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-# Install dependencies
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure API Keys
+### 3. Configure API Keys
 
 ```bash
 # Copy example config and add your API keys
 cp config.example.yaml config.yaml
 ```
 
-### 3. Install Guardrails
+### 4. Install Guardrails
 
 ```bash
 # Install all 5 guardrail validators from the hub
@@ -35,7 +35,6 @@ guardrails hub install hub://guardrails/web_sanitization
 ```
 
 ## Usage
-
 
 This will:
 - Apply guardrails to incoming queries
