@@ -4,7 +4,6 @@ aiosignal==1.4.0
 aiosqlite==0.21.0
 annotated-types==0.7.0
 anyio==4.9.0
-arize-ai-grhub-dataset-embeddings-guardrails==0.0.0
 arize-otel==0.9.0
 arrow==1.3.0
 attrs==25.3.0
@@ -34,9 +33,6 @@ griffe==0.36.9
 grpcio==1.73.1
 guardrails-ai==0.6.6
 guardrails-api-client==0.4.0a1
-guardrails-grhub-ban-list==0.1.0
-guardrails-grhub-valid-length==0.0.0
-guardrails-grhub-web-sanitization==0.0.0
 guardrails_hub_types==0.0.4
 h11==0.16.0
 hf-xet==1.1.5
