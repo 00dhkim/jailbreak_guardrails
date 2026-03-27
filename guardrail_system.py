@@ -96,7 +96,7 @@ def web_sanitization_guardrail(query: str, config: Dict[str, Any]) -> Dict[str, 
         return {"output": "BLOCKED","error": f"{e}"}
 
 
-def validate_input(query: str) -> Dict[str, Any]:
+def validate_input(query: str, actual: str = "PASS") -> Dict[str, Any]:
 
     tracer = trace.get_tracer("guardrail-system")
 
@@ -153,7 +153,7 @@ def validate_input(query: str) -> Dict[str, Any]:
                         guardrail_span.set_attribute("guardrail.error", result["error"])
 
                     guardrail_span.set_attribute("guardrail.output", result["output"]) 
-                    guardrail_span.set_attribute("guardrail.actual", "BLOCKED")    
+                    guardrail_span.set_attribute("guardrail.actual", actual)
                     guardrail_span.set_attribute(SpanAttributes.OUTPUT_VALUE, result["output"])
                     
                 except Exception as e:
@@ -175,7 +175,7 @@ def validate_input(query: str) -> Dict[str, Any]:
         # Set final span attributes
         span.set_attribute(SpanAttributes.OUTPUT_VALUE, is_valid)
         span.set_attribute("guardrail.blocked_count", len(errors))
-        span.set_attribute("guardrail.actual", "BLOCKED")  
+        span.set_attribute("guardrail.actual", actual)
 
         if not is_valid:
             span.set_attribute("guardrail.blocked_reasons", str(errors))

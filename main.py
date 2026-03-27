@@ -48,20 +48,27 @@ def load_prompts_from_csv(csv_file, prompt_index, max_prompts=None):
 
 tracer = init_arize_tracing()
 
-test_queries = load_prompts_from_csv(
-    config["data"]["csv_file"],
+good_prompts = load_prompts_from_csv(
+    config["data"]["good_prompts_csv"],
     config["data"]["prompt_column"],
-    max_prompts=2,  # Limit to 10 for testing
+    max_prompts=100,
 )
-    
+jailbreak_prompts = load_prompts_from_csv(
+    config["data"]["jailbreak_prompts_csv"],
+    config["data"]["prompt_column"],
+    max_prompts=100,
+)
+
+test_queries = [(q, "PASS") for q in good_prompts] + [(q, "BLOCKED") for q in jailbreak_prompts]
+
 # Test each query
-for query in test_queries:
+for query, actual in test_queries:
     with tracer.start_as_current_span("RAG") as rag_span:
         rag_span.set_attribute(SpanAttributes.OPENINFERENCE_SPAN_KIND, OpenInferenceSpanKindValues.CHAIN.value)
         rag_span.set_attribute(SpanAttributes.INPUT_VALUE, query)
-                    
+
         # Apply guardrails with detailed tracing
-        validation_result = validate_input(query)
+        validation_result = validate_input(query, actual)
         
         # Check if query passed validation
         if not validation_result["valid"]:
