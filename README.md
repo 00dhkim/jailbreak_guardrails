@@ -34,6 +34,12 @@ guardrails hub install hub://tryolabs/restricttotopic
 guardrails hub install hub://guardrails/web_sanitization
 ```
 
+### 5. Run
+
+```bash
+python main.py
+```
+
 ## Usage
 
 This will:
