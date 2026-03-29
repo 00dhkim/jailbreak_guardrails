@@ -7,6 +7,11 @@ from guardrails.hub import ValidLength
 from guardrails.hub import BanList
 from guardrails.hub import RestrictToTopic
 from guardrails.hub import WebSanitization
+import yaml
+
+with open("config.yaml", "r") as f:
+    _config = yaml.safe_load(f)
+_guardrail_flags = _config.get("guardrails", {})
 
 # from guardrails import install
 # install("hub://arize-ai/dataset_embeddings_guardrails", quiet=True, install_local_models=True)
@@ -96,33 +101,36 @@ def web_sanitization_guardrail(query: str, config: Dict[str, Any]) -> Dict[str, 
         return {"output": "BLOCKED","error": f"{e}"}
 
 
-def validate_input(query: str, actual: str = "PASS") -> Dict[str, Any]:
+def validate_input(query: str, actual: str = "PASS", embedding_threshold: float = None) -> Dict[str, Any]:
+    if embedding_threshold is None:
+        embedding_threshold = _config.get("embedding_threshold", 0.25)
 
     tracer = trace.get_tracer("guardrail-system")
 
     #################################
     ### CUSTOMIZE GUARDRAILS HERE ###
     #################################
-    guardrails = [
-        {"function": arize_embeddings_guardrail, "config": {"threshold": "0.25"}},
-        {"function": max_length_guardrail, "config": {"max": "1500"}},
-        {"function": ban_list_guardrail, "config": {
+    all_guardrails = [
+        {"key": "arize_embeddings", "function": arize_embeddings_guardrail, "config": {"threshold": embedding_threshold}},
+        {"key": "max_length", "function": max_length_guardrail, "config": {"max": "1500"}},
+        {"key": "ban_list", "function": ban_list_guardrail, "config": {
             "banned_words": ["jailbreak", "bypass", "override", "ignore previous",
                              "disregard instructions", "unfiltered", "unrestricted",
                              "prompt injection", "DAN", "simulate", "pretend", "roleplay",
                              "act as", "do anything now", "forget you are", "disable safety",
                              "system prompt", "memory hack"]}},
-        {"function": restrict_topic_guardrail, "config": {
-            "valid_topics": ["arize", "tracing", "experiments", "datasets", "api", "phoneix", 
-                             "observability", "machine learning", "performance", "drift", 
+        {"key": "restrict_topic", "function": restrict_topic_guardrail, "config": {
+            "valid_topics": ["arize", "tracing", "experiments", "datasets", "api", "phoneix",
+                             "observability", "machine learning", "performance", "drift",
                              "data", "monitoring", "alerts", "bias", "prediction", "model",
-                             "accuracy", "precision", "recall", "auc", "f1", "score", 
-                             "evaluations", "prompting", "prompt playground", "monitors"], 
-            "invalid_topics": ["drugs", "sex", "violence", "hate", "racism", "crime"], 
-            "disable_classifier": True, 
+                             "accuracy", "precision", "recall", "auc", "f1", "score",
+                             "evaluations", "prompting", "prompt playground", "monitors"],
+            "invalid_topics": ["drugs", "sex", "violence", "hate", "racism", "crime"],
+            "disable_classifier": True,
             "disable_llm": False}},
-        {"function": web_sanitization_guardrail, "config": {}}
+        {"key": "web_sanitization", "function": web_sanitization_guardrail, "config": {}}
     ]
+    guardrails = [g for g in all_guardrails if _guardrail_flags.get(g["key"], True)]
     
     with tracer.start_as_current_span("guardrail_validation") as span:
         span.set_attribute(SpanAttributes.OPENINFERENCE_SPAN_KIND, OpenInferenceSpanKindValues.CHAIN.value)
